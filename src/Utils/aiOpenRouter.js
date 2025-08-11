@@ -34,7 +34,7 @@ const getAIMoveGoogleAI = async (board) => {
         "Content-Type":"application/json"
       },
       body:JSON.stringify({
-        model:"deepseek/deepseek-r1-0528:free",
+        model:"deepseek/deepseek-r1",
         temperature:0.9,
         messages:[
           {role:"system" , content:systemPrompt},
@@ -45,7 +45,6 @@ const getAIMoveGoogleAI = async (board) => {
 
     const data = await res.json();
     const text = data.choices?.[0]?.message?.content?.trim();
-    
     const match = text.match(/\d+/);
     return match;
     
@@ -53,7 +52,6 @@ const getAIMoveGoogleAI = async (board) => {
 
   try {
     let move = await getAiMover(board);
-    console.log(move);
     return move;
   } catch (error) {
     console.error("Error in Gemini Move:", error);
